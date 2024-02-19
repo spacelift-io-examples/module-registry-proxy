@@ -22,3 +22,28 @@ module "tfe-module-proxy" {
   spacelift_account_name = "admin"
 }
 ```
+
+## Custom Hostname
+
+The module doesn't include a custom hostname for the API gateway currently. Before you can use it you'll need to modify this PoC to setup an ACM certificate as well as a custom domain name (<https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_domain_name>).
+
+## Spacelift stack registry credentials
+
+In order for a Spacelift stack to be able to use the registry via the proxy, you need to configure your terraformrc file to include an entry for your old registry URL using the Spacelift token. You can do this using a Spacelift context containing the following mounted file called `add-old-registry-credentials.sh` (make sure to replace `<your-old-registry-url>` with the hostname of your previous registry):
+
+```shell
+#!/bin/sh
+
+cat <<EOT >> ~/.terraformrc
+credentials "<your-old-registry-url>" {
+  token = "$SPACELIFT_API_TOKEN"
+}
+EOT
+
+```
+
+As well as the following _Before Init_ hook:
+
+```shell
+chmod u+x /mnt/workspace/add-old-registry-credentials.sh && /mnt/workspace/add-old-registry-credentials.sh
+```
