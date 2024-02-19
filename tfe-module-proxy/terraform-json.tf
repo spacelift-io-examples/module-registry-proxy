@@ -13,12 +13,6 @@ resource "aws_lambda_function" "terraform-json" {
   runtime          = "nodejs20.x"
   source_code_hash = data.archive_file.terraform-json.output_base64sha256
   timeout          = 30
-
-  environment {
-    variables = {
-      # TODO
-    }
-  }
 }
 
 resource "aws_lambda_permission" "terraform-json" {

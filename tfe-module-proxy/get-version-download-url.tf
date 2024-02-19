@@ -16,7 +16,8 @@ resource "aws_lambda_function" "get-version-download-url" {
 
   environment {
     variables = {
-      # TODO
+      "SPACELIFT_BASE_URL"     = var.spacelift_base_url
+      "SPACELIFT_ACCOUNT_NAME" = var.spacelift_account_name
     }
   }
 }

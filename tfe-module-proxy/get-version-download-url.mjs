@@ -1,16 +1,11 @@
-// TODO: allow the Spacelift URL to be passed via an input parameter
-// TODO: allow the Spacelift account name to be passed via an input parameter
-// TODO: remove logging of event data
-
 /* global fetch */
 export const handler = async (event) => {
   console.log(
     "Received request for /{namespace}/{name}/{provider}/{version}/download"
   );
 
-  // TODO: pull these from environment vars
-  const spaceliftBaseURL = "https://spacelift.sh";
-  const spaceliftAccount = "spaceliftsh";
+  const spaceliftBaseURL = process.env.SPACELIFT_BASE_URL;
+  const spaceliftAccount = process.env.SPACELIFT_ACCOUNT_NAME;
 
   const spaceliftURL = `${spaceliftBaseURL}/registry/modules/v1/${spaceliftAccount}/${event.pathParameters.name}/${event.pathParameters.provider}/${event.pathParameters.version}/download`;
 

@@ -20,6 +20,10 @@ module "tfe-module-proxy" {
   source = "./tfe-module-proxy"
 
   artifacts_path = "${path.root}/artifacts"
+
+  # Update these two parameters to point at your correct Spacelift URL and account name
+  spacelift_base_url     = "https://spacelift.someorg.com"
+  spacelift_account_name = "admin"
 }
 
 output "api_endpoint" {

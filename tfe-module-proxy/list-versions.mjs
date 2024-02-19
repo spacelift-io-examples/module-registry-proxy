@@ -1,15 +1,12 @@
-// TODO: allow the Spacelift URL to be passed via an input parameter
-// TODO: allow the Spacelift account name to be passed via an input parameter
-// TODO: remove logging of event data
-
 /* global fetch */
 import { gzipSync } from "zlib";
 
 export const handler = async (event) => {
   console.log("Received request for /{namespace}/{name}/{provider}/versions");
 
-  const spaceliftBaseURL = "https://spacelift.sh";
-  const spaceliftAccount = "spaceliftsh";
+  const spaceliftBaseURL = process.env.SPACELIFT_BASE_URL;
+  const spaceliftAccount = process.env.SPACELIFT_ACCOUNT_NAME;
+
   const spaceliftURL = `${spaceliftBaseURL}/registry/modules/v1/${spaceliftAccount}/${event.pathParameters.name}/${event.pathParameters.provider}/versions`;
 
   console.log(`Making a request for ${spaceliftURL}`);
