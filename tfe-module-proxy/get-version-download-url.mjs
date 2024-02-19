@@ -9,8 +9,6 @@ export const handler = async (event) => {
 
   const spaceliftURL = `${spaceliftBaseURL}/registry/modules/v1/${spaceliftAccount}/${event.pathParameters.name}/${event.pathParameters.provider}/${event.pathParameters.version}/download`;
 
-  console.log(`Making a request for ${spaceliftURL}`);
-
   const authHeader = event.headers.authorization;
 
   const spaceliftResponse = await fetch(spaceliftURL, {

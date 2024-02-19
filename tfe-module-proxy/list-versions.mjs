@@ -9,26 +9,27 @@ export const handler = async (event) => {
 
   const spaceliftURL = `${spaceliftBaseURL}/registry/modules/v1/${spaceliftAccount}/${event.pathParameters.name}/${event.pathParameters.provider}/versions`;
 
-  console.log(`Making a request for ${spaceliftURL}`);
+  const encoding = event.headers["accept-encoding"];
 
   const spaceliftResponse = await fetch(spaceliftURL, {
     headers: {
       authorization: event.headers.authorization,
-      "accept-encoding": event.headers["accept-encoding"],
+      "accept-encoding": encoding,
       "user-agent": event.headers["user-agent"],
       "x-terraform-version": event.headers["x-terraform-version"],
     },
   });
 
-  // TODO: only do this if gzip encoding is requested
-  const body = await spaceliftResponse.text();
-  const compressedBody = gzipSync(body);
+  let body = await spaceliftResponse.text();
+  if (encoding === "gzip") {
+    body = gzipSync(body).toString("base64");
+  }
 
   const response = {
     statusCode: spaceliftResponse.status,
     headers: {},
-    body: compressedBody.toString("base64"),
-    isBase64Encoded: true,
+    body: body,
+    isBase64Encoded: encoding === "gzip",
   };
 
   for (const headerPair of spaceliftResponse.headers.entries()) {
