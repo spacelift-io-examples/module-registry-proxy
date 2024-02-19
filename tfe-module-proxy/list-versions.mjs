@@ -6,10 +6,7 @@
 import { gzipSync } from "zlib";
 
 export const handler = async (event) => {
-  console.log(
-    "Received request for /{namespace}/{name}/{provider}/versions: " +
-      JSON.stringify(event)
-  );
+  console.log("Received request for /{namespace}/{name}/{provider}/versions");
 
   const spaceliftBaseURL = "https://spacelift.sh";
   const spaceliftAccount = "spaceliftsh";

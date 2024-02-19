@@ -2,9 +2,7 @@
 // TODO: remove logging of event data
 
 export const handler = async (event) => {
-  console.log(
-    "Received request for well-known/terraform.json: " + JSON.stringify(event)
-  );
+  console.log("Received request for well-known/terraform.json");
 
   var response = {
     statusCode: 200,

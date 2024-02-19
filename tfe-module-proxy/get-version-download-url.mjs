@@ -5,8 +5,7 @@
 /* global fetch */
 export const handler = async (event) => {
   console.log(
-    "Received request for /{namespace}/{name}/{provider}/{version}/download: " +
-      JSON.stringify(event)
+    "Received request for /{namespace}/{name}/{provider}/{version}/download"
   );
 
   // TODO: pull these from environment vars
