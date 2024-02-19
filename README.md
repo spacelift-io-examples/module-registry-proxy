@@ -47,3 +47,5 @@ As well as the following _Before Init_ hook:
 ```shell
 chmod u+x /mnt/workspace/add-old-registry-credentials.sh && /mnt/workspace/add-old-registry-credentials.sh
 ```
+
+The advantage of doing this via a Spacelift context is that you can define this configuration in one place, and use it in all the affected stacks. You can also make use of [auto-attach rules](https://docs.spacelift.io/concepts/configuration/context#auto-attachments) to automatically attach the context to all the stacks that need to use the old registry.
