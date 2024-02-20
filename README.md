@@ -1,6 +1,6 @@
 # TFE module registry proxy
 
-This repo contains a PoC of module registry proxy implemented using AWS API Gateway. It's intended to sit in front of a Spacelift module registry, allowing you to use the Spacelift registry temporarily without having to update every `module` definition in Terraform that's pointing at an old registry.
+This repo contains a PoC of module registry proxy implemented using AWS API Gateway. It's intended to sit in front of a Spacelift module registry, allowing you to temporarily continue using an existing registry without having to update every `module` definition in Terraform.
 
 The code for the proxy is defined in the `tfe-module-proxy` folder, and consists of the following components:
 
